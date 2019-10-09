@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ScoutTest</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= yield %>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>
+    <%= javascript_tag do %>
+      (function($) {
+        $(document).ready(function() {
+          CKEDITOR.plugins.addExternal('autogrow', '//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.12.1/plugins/autogrow/', 'plugin.js');
+    
+          CKEDITOR.replaceAll(function( textarea, cfg ) {
+            cfg.extraPlugins = 'uploadimage,autogrow';
+            cfg.uploadUrl = '<%= upload_comments_path %>';
+          });
+        });
+      })(jQuery);
+    <% end %>
+  </body>
+</html>
